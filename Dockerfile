@@ -4,12 +4,11 @@ FROM debian:buster-slim
 RUN apt-get update && \
 	apt-get -y install build-essential \
 	libssl-dev zlib1g-dev libdbd-mysql-perl \
-	libsyntax-keyword-try-perl openssl unzip \
+	libsyntax-keyword-try-perl openssl unzip && \
 	rm -rf /var/lib/apt/lists/*
 
 RUN	cpan CPAN && \
-	cpan MaxMind::DB::Reader && \
-	cpan GeoIP2::Database::Reader
+	cpan MaxMind::DB::Reader GeoIP2::Database::Reader
 
 WORKDIR /app/
 
