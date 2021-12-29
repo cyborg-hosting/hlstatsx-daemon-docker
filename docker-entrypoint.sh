@@ -9,7 +9,7 @@ function process_signal()
 trap process_signal SIGTERM SIGINT SIGQUIT SIGHUP ERR
 
 if [ $1 = 'cron' ]; then
-    cron
+    cron -f &
 
     cronpid=$!
 
