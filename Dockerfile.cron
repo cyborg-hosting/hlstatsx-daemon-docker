@@ -39,4 +39,4 @@ RUN chmod +x docker-entrypoint.sh
 
 ENTRYPOINT [ "/app/scripts/docker-entrypoint.sh" ]
 
-CMD [ ]
+CMD [ "cron" ]
