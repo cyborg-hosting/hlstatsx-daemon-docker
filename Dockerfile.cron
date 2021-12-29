@@ -33,5 +33,8 @@ RUN unzip master.zip && \
 WORKDIR /app/scripts/
 
 COPY hlstatsx-cron /etc/cron.d/hlstatsx-cron
+COPY docker-entrypoint.sh ./
 
-CMD [ "cron", "-f" ]
+ENTRYPOINT [ "/app/scripts/docker-entrypoint.sh" ]
+
+CMD [ ]

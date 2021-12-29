@@ -2,14 +2,18 @@
 
 function process_signal()
 {
-    kill -TERM $cronPID
-    wait $cronPID
+    kill -TERM $cronpid
+    wait $cronpid
 }
 
 trap process_signal SIGTERM SIGINT SIGQUIT SIGHUP ERR
 
-cron -f &
+if [ -z $1 ]; then
+    cron -f &
 
-cronPID=$!
+    cronPID=$!
 
-wait $cronPID
+    wait $cronpid
+else
+    exec $@
+fi
