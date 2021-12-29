@@ -8,7 +8,7 @@ function process_signal()
 
 trap process_signal SIGTERM SIGINT SIGQUIT SIGHUP ERR
 
-if [ $1 -eq 'cron' ]; then
+if [ $1 = 'cron' ]; then
     cron
 
     cronpid=$!
