@@ -11,7 +11,7 @@ trap process_signal SIGTERM SIGINT SIGQUIT SIGHUP ERR
 if [ $1 -eq 'cron' ]; then
     cron
 
-    cronPID=$!
+    cronpid=$!
 
     wait $cronpid
 else
