@@ -35,6 +35,8 @@ WORKDIR /app/scripts/
 COPY hlstatsx-cron /etc/cron.d/hlstatsx-cron
 COPY docker-entrypoint.sh ./
 
+RUN chmod +x docker-entrypoint.sh
+
 ENTRYPOINT [ "/app/scripts/docker-entrypoint.sh" ]
 
 CMD [ ]
