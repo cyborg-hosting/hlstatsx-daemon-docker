@@ -2,13 +2,24 @@
 FROM debian:buster-slim
 
 RUN apt-get update && \
-	apt-get -y install build-essential \
-	libssl-dev zlib1g-dev libdbd-mysql-perl \
-	libsyntax-keyword-try-perl openssl unzip cron
+	apt-get -y install \
+	build-essential \
+	cron \
+	cpanminus \
+	libdbd-mysql-perl \
+	libsyntax-keyword-try-perl \
+	libssl-dev \
+	openssl \
+	unzip \
+	zlib1g-dev && \
+	rm -rf /var/lib/apt/lists/*
+	
 
-RUN	cpan CPAN && \
-	cpan MaxMind::DB::Reader && \
-	cpan GeoIP2::Database::Reader
+RUN	cpanm CPAN && \
+	cpanm App::cpanminus && \
+	cpanm MaxMind::DB::Reader && \
+	cpanm GeoIP2::Database::Reader && \
+	cpanm Syntax::Keyword::Try
 
 WORKDIR /app/
 
