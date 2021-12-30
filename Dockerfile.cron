@@ -40,3 +40,5 @@ RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT [ "/app/scripts/docker-entrypoint.sh" ]
 
 CMD [ "cron" ]
+
+HEALTHCHECK CMD perl /app/scripts/run_hlstats status || exit 1
