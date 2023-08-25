@@ -8,7 +8,7 @@ signal_handler()
     exit
 }
 
-if [ "$1" = 'cron' ]; then
+if [ "$1" = 'run' ]; then
     /scripts/run_hlstats start
     echo 'HLstatsX daemon started'
 
