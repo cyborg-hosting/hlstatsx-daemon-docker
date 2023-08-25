@@ -1,0 +1,15 @@
+SHELL=/bin/sh
+HOME=/scripts
+
+# Check if daemon running (every 30 minutes)
+*/30 * * * * root /scripts/run_hlstats start > /proc/1/fd/1 2> /proc/1/fd/2
+
+# Auto restart daemon (midnight)
+0 5 * * * root /scripts/run_hlstats restart > /proc/1/fd/1 2> /proc/1/fd/2
+
+# Generate awards and cleanup
+0 5 * * * root /scripts/hlstats-awards.pl > /proc/1/fd/1 2> /proc/1/fd/2
+
+# Auto remove old Daemon logs (14 days)
+0 5 * * * root find /app/scripts/logs/ -type f -mtime +14 -exec rm -rf {} \ >/dev/null 2>&1
+

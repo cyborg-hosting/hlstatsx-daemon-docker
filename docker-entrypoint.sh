@@ -1,28 +1,23 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-function process_signal()
+signal_handler()
 {
-    echo '[INFO] termination signal received'
-    ./run_hlstats stop
-    kill -TERM $cronpid
-    wait $cronpid
-    echo '[INFO] terminated'
+    /scripts/run_hlstats stop
+    kill -TERM "$CRON_PID"
+    wait "$CRON_PID"
     exit
 }
 
-if [ $1 = 'cron' ]
-then
-    echo '[INFO] HLstatsX daemon starting'
-    ./run_hlstats start
-    echo '[INFO] HLstatsX daemon started'
+if [ "$1" = 'cron' ]; then
+    /scripts/run_hlstats start
+    echo 'HLstatsX daemon started'
 
-    echo '[INFO] cron starting'
     cron -f &
-    cronpid=$!
-    echo '[INFO] cron started'
+    CRON_PID=$!
+    echo 'cron daemon started'
 
-    trap process_signal SIGTERM SIGINT SIGQUIT SIGHUP ERR
-    wait $cronpid
+    trap signal_handler TERM INT QUIT HUP
+    wait "$CRON_PID"
 else
-    exec $@
+    exec "$@"
 fi
