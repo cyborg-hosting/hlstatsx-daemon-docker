@@ -25,7 +25,7 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY hlstats-cron /etc/cron.d/hlstats
 RUN mkdir /logs && \
 	echo "$(awk '!x{x=sub("^LOGDIR=.+","LOGDIR=/logs");};1;' /scripts/run_hlstats)" > /scripts/run_hlstats && \
-	chmod +x /scripts/run_* /scripts/hlstats-*.pl && \
+	chmod +x /scripts/run_* /scripts/hlstats-*.pl /scripts/hlstats.pl && \
 	chmod +x /docker-entrypoint.sh
 
 WORKDIR /scripts
